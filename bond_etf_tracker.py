@@ -30,7 +30,7 @@ etf_prices = {
     "VGOV": get_price("VGOV.L"),
     "IEF": get_price("IEF"),
     "TLT": get_price("TLT"),
-    "AGGH": get_price("AGGH.L")
+    "AGGH": get_price("AGGH")
 }
 
 # --------------------- INPUT TRACKER ---------------------
@@ -80,12 +80,3 @@ with st.expander("🇺🇸 美国联储降息相关新闻（关键词：Fed inte
 # --------------------- END ---------------------
 st.markdown("---")
 st.caption("如需提醒功能，可结合 email + GitHub Actions 定时运行此页面逻辑。")
-# --------------------- TICKER 测试 ---------------------
-st.subheader("🔍 AGGH 当前价格测试")
-
-for ticker in ["AGGH", "AGGH.L", "AGGH.AS"]:
-    try:
-        p = get_price(ticker)
-        st.write(f"{ticker} 当前价格：{p}")
-    except Exception as e:
-        st.write(f"{ticker} 错误：{e}")
