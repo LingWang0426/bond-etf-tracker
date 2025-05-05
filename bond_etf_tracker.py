@@ -57,11 +57,21 @@ etf_prices = {
 st.subheader("📈 ETF 价格走势图（过去6个月）")
 selected_etf = st.selectbox("选择查看的ETF", list(etf_prices.keys()))
 data = get_history(selected_etf if selected_etf != "VGOV" else "VGOV.L")
+
 if data is not None and not data.empty:
-    st.line_chart(data["Close"])
+    import altair as alt
+    chart = alt.Chart(data.reset_index()).mark_line().encode(
+        x=alt.X("Date:T", title="日期", axis=alt.Axis(labelAngle=0, format="%b %d")),
+        y=alt.Y("Close:Q", title="收盘价（$）"),
+        tooltip=["Date:T", "Close:Q"]
+    ).properties(
+        width=800,
+        height=400,
+        title=f"{selected_etf} 收盘价走势（过去6个月）"
+    )
+    st.altair_chart(chart, use_container_width=True)
 else:
     st.warning("⚠️ 未能获取该ETF的历史价格数据")
-
 
 
 # --------------------- INPUT TRACKER ---------------------
