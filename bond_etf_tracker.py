@@ -17,6 +17,28 @@ total_investment = sum(target_allocations.values())
 # --------------------- PAGE SETUP ---------------------
 st.set_page_config(page_title="债券ETF建仓追踪器", layout="wide")
 st.title("📊 债券ETF建仓追踪器")
+# --------------------- 降息新闻提醒模块 ---------------------
+st.subheader("⏰ 降息新闻关注提醒")
+
+import datetime
+
+# 初始化提醒时间（在本地浏览器 session 中保存）
+if "last_check" not in st.session_state:
+    st.session_state["last_check"] = datetime.date.today() - datetime.timedelta(days=7)
+
+# 计算距离上次查看的天数
+days_since = (datetime.date.today() - st.session_state["last_check"]).days
+
+# 提示文字
+if days_since >= 3:
+    st.warning(f"⚠️ 距离你上次查看降息新闻已过去 **{days_since} 天**，建议及时关注并考虑操作。")
+else:
+    st.success(f"✅ 你最近查看过降息新闻（{days_since} 天前）")
+
+# 更新按钮
+if st.button("📌 我已查看最新新闻"):
+    st.session_state["last_check"] = datetime.date.today()
+    st.success("✔️ 已记录查看时间，感谢你的关注！")
 
 # --------------------- PRICE FETCHING ---------------------
 def get_price(ticker):
