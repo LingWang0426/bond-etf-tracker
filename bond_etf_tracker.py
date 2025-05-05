@@ -4,7 +4,6 @@ import pandas as pd
 import yfinance as yf
 import datetime
 import requests
-import matplotlib.pyplot as plt
 
 # --------------------- CONFIG ---------------------
 target_allocations = {
