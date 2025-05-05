@@ -18,6 +18,7 @@ total_investment = sum(target_allocations.values())
 st.set_page_config(page_title="债券ETF建仓追踪器", layout="wide")
 st.title("📊 债券ETF建仓追踪器")
 
+
 # --------------------- 提醒模块 ---------------------
 st.subheader("⏰ 降息新闻关注提醒")
 if "last_check" not in st.session_state:
@@ -60,6 +61,8 @@ if data is not None and not data.empty:
     st.line_chart(data["Close"])
 else:
     st.warning("⚠️ 未能获取该ETF的历史价格数据")
+
+
 
 # --------------------- INPUT TRACKER ---------------------
 st.subheader("✅ 当前持仓记录（手动输入或连接账户）")
